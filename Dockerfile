@@ -116,7 +116,10 @@ ARG BUILD_THREADS=16
 ARG IMPORT_ADMINISTRATIVE=false
 COPY scripts/filter_administrative.sh \
       /srv/nominatim/scripts/filter_administrative.sh
+USER root
 RUN dos2unix /srv/nominatim/scripts/filter_administrative.sh
+RUN chmod 777 /srv/nominatim/scripts/filter_administrative.sh
+USER nominatim
 RUN /srv/nominatim/scripts/filter_administrative.sh
 
 # Add postgresql users
